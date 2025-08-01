@@ -1,0 +1,367 @@
+/*
+============================================================
+| CAREERSUITE.AI - MASTER THEME & BRANDING STYLESHEET      |
+| Version: 2.2 (Final & Complete)                          |
+|                                                          |
+| This file contains all global branding variables and     |
+| styles. It should be loaded by all HTML pages to ensure  |
+| a consistent look and feel.                              |
+============================================================
+*/
+
+/*
+============================================================
+| 1. GLOBAL VARIABLES & BASE STYLES                        |
+============================================================
+*/
+:root {
+    /* Fonts */
+    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* Light Theme (Default) */
+    --primary-bg: #f0f4f8;
+    --primary-bg-alt: #e9eef2;
+    --text-color: #2F4858;
+    --text-muted: #556068;
+    --header-color: #33658A;
+    --card-bg: #ffffff;
+    --card-border: #dde4e9;
+    --input-bg: #ffffff;
+    --input-border: #c0c8d0;
+    --input-text: #2F4858;
+    --input-placeholder: #778088;
+    --button-primary-bg: #F26419;
+    --button-primary-text: white;
+    --button-primary-hover-bg: #d4530f;
+    --button-secondary-bg: #86BBD8;
+    --button-secondary-text: #2F4858;
+    --button-secondary-hover-bg: #70a6c2;
+    --link-color: #33658A;
+    --link-hover-color: #F6AE2D;
+    --divider-color: #dde4e9;
+    --status-success-bg: #e6f7ed;
+    --status-success-text: #1e813c;
+    --status-success-border: #b7ebc6;
+    --status-success-bg-light: #d1e7dd;
+    --status-error-bg: #fdecea;
+    --status-error-text: #c7302b;
+    --status-error-border: #f8c1be;
+    --status-warning-bg: #fff8e1;
+    --status-warning-text: #e68a00;
+    --status-warning-border: #ffecb3;
+    --status-info-bg: #e7f3fe;
+    --status-info-text: #2979ff;
+    --status-info-border: #b3d4fc;
+    --status-info-bg-light: #d1ecf1;
+    --loader-track: #f0f0f0;
+    --loader-spinner: #33658A; /* Lapis Lazuli */
+    --lapis-lazuli: #33658A;
+    --carolina-blue: #86BBD8;
+}
+
+body.theme-dark,
+body.theme-system-actual-dark {
+    /* Dark Theme Variable Overrides */
+    --primary-bg: #2F4858;
+    --primary-bg-alt: #3a5060;
+    --text-color: #E0E5EA;
+    --text-muted: #a0a8b0;
+    --header-color: #86BBD8;
+    --card-bg: #3a5060;
+    --card-border: #4a6070;
+    --input-bg: #2F4858;
+    --input-border: #556878;
+    --input-text: #E0E5EA;
+    --input-placeholder: #889098;
+    --button-primary-bg: #F6AE2D;
+    --button-primary-text: #2F4858;
+    --button-primary-hover-bg: #dAA027;
+    --button-secondary-bg: #33658A;
+    --button-secondary-text: white;
+    --button-secondary-hover-bg: #29527A;
+    --link-color: #86BBD8;
+    --link-hover-color: #F6AE2D;
+    --divider-color: #4a6070;
+    --status-success-bg: #1a3a1a;
+    --status-success-text: #a5d6a7;
+    --status-success-border: #3a6a3a;
+    --status-success-bg-light: #2c5f2d;
+    --status-error-bg: #4e0c0c;
+    --status-error-text: #ffcdd2;
+    --status-error-border: #7e2c2c;
+    --status-warning-bg: #4d2d00;
+    --status-warning-text: #ffecb3;
+    --status-warning-border: #7d5d20;
+    --status-info-bg: #29527a;
+    --status-info-text: #b3d4fc;
+    --status-info-border: #1e3a5a;
+    --status-info-bg-light: #1d3c5a;
+    --loader-track: #3a5060;
+    --loader-spinner: var(--carolina-blue);
+    --lapis-lazuli: #528AAE;
+    --carolina-blue: #A0CFEE;
+}
+
+/* Base body styles for full pages */
+body {
+    font-family: var(--font-main);
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px 0;
+    min-height: calc(100vh - 40px);
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+/*
+============================================================
+| 2. GLOBAL COMPONENTS & BRANDING ELEMENTS                 |
+============================================================
+*/
+
+.page-container {
+    max-width: 950px;
+    margin: 20px auto; /* Added top/bottom margin for spacing */
+    padding: 25px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid var(--card-border);
+}
+.page-container.profile-page { max-width: 850px; }
+.page-container.options-page-container { max-width: 550px; width: 100%; box-sizing: border-box; }
+
+/* --- Branded Page Banner --- */
+.page-banner {
+    width: 50%;
+    min-width: 250px;
+    aspect-ratio: 1000 / 200;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 auto 25px auto;
+    background-image: url('../icons/banner_light.png');
+}
+
+body.theme-dark .page-banner,
+body.theme-system-actual-dark .page-banner {
+    background-image: url('../icons/banner_dark.png');
+}
+
+/* Branded Header with Icon */
+.page-title-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--divider-color);
+}
+.page-title-icon-themed {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('../icons/icon48_light.png');
+}
+body.theme-dark .page-title-icon-themed,
+body.theme-system-actual-dark .page-title-icon-themed {
+    background-image: url('../icons/icon48_dark.png');
+}
+.page-title-header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    color: var(--header-color);
+}
+.page-container.tailoring-page .page-title-header {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+/* Base Header styles from pages */
+.page-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--divider-color); }
+.page-header h1 { color: var(--header-color); margin-top: 0; margin-bottom: 5px; font-size: 1.8em; }
+.page-header p { font-size: 1em; color: var(--text-muted); }
+
+/* Global buttons, inputs, labels, etc. */
+.primary-action-button { display: inline-block; width: auto; min-width: 120px; padding: 10px 20px; background-color: var(--button-primary-bg); color: var(--button-primary-text); border: none; border-radius: 5px; cursor: pointer; font-size: 1em; font-weight: bold; text-align: center; transition: background-color 0.2s ease-in-out; }
+.primary-action-button:hover { background-color: var(--button-primary-hover-bg); }
+.primary-action-button:disabled { background-color: #cccccc !important; color: #666666 !important; cursor: not-allowed; opacity: 0.7; }
+
+.secondary-action-button { display: inline-block; width: auto; min-width: 120px; padding: 10px 15px; background-color: var(--button-secondary-bg); color: var(--button-secondary-text); border: none; border-radius: 5px; cursor: pointer; font-size: 0.9em; font-weight: normal; text-align:center; transition: background-color 0.2s ease-in-out; }
+.secondary-action-button:hover { background-color: var(--button-secondary-hover-bg); }
+
+input[type="password"], input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea, select { background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--input-text); border-radius: 4px; padding: 10px; font-size: 1em; box-sizing: border-box; width: 100%; }
+input::placeholder, textarea::placeholder { color: var(--input-placeholder); }
+
+hr.section-divider { border: 0; height: 1px; background-color: var(--divider-color); margin: 30px 0; }
+hr.sub-divider { border: 0; height: 1px; background-color: var(--card-border); margin: 25px 0; }
+
+.loader { border: 4px solid var(--loader-track); border-top: 4px solid var(--loader-spinner); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 15px auto; display: none; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/*
+============================================================
+| 3. POPUP-SPECIFIC STYLES                                 |
+============================================================
+*/
+
+.popup-container { padding: 15px; display: flex; flex-direction: column; }
+.popup-header { display: flex; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--divider-color); }
+.popup-header .header-icon { width: 32px; height: 32px; margin-right: 10px; }
+.popup-header h2 { margin: 0; font-size: 1.3em; color: var(--header-color); }
+
+.popup-action-button { font-size: 0.95em; width: 100%; box-sizing: border-box; padding: 10px 15px; margin-bottom: 10px; }
+.popup-action-button.secondary-action-button { margin-top: 5px; margin-bottom: 5px; }
+
+.status-message-popup { text-align: center; padding: 8px; border-radius: 4px; margin-bottom: 10px; font-size: 0.9em; border: 1px solid transparent; }
+.status-message-popup.error-message-specific { background-color: var(--status-error-bg); color: var(--status-error-text); border-color: var(--status-error-border); }
+
+#resultsArea { margin-top: 5px; margin-bottom: 15px; padding: 12px; background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 5px; width: 100%; min-height: 50px; max-height: 200px; overflow-y: auto; box-sizing: border-box; font-size: 0.9em; line-height: 1.4; color: var(--text-color); }
+#resultsArea .placeholder-text { color: var(--input-placeholder); font-style: italic; text-align: center; padding-top: 10px; }
+#resultsArea h3, #resultsArea h4 { color: var(--header-color); margin-top: 8px; margin-bottom: 4px; font-size: 1.05em; }
+#resultsArea h3:first-child, #resultsArea h4:first-child { margin-top: 0; }
+#resultsArea ul { padding-left: 18px; margin-top: 3px; margin-bottom: 8px; }
+#resultsArea li { margin-bottom: 2px; }
+
+.weekly-stats-section { margin-top: 0; margin-bottom: 15px; padding: 10px; background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 5px; }
+.weekly-stats-title { margin-top: 0; margin-bottom: 10px; font-size: 1em; color: var(--header-color); text-align: center; padding-bottom: 5px; border-bottom: 1px solid var(--divider-color); }
+
+/*
+============================================================
+| 4. RESUME PROFILE & TAILORING COMMON STYLES              |
+============================================================
+*/
+
+.setting-container { padding: 20px; border-radius: 6px; margin-bottom: 25px; border: 1px solid var(--divider-color); }
+.setting-container h3 { margin-top:0; margin-bottom: 15px; color: var(--header-color); font-size: 1.2em; }
+
+.action-button { font-family: var(--font-main, Arial, Helvetica, sans-serif) !important; font-size: 0.9em !important; padding: 6px 12px !important; border: 1px solid var(--input-border, #ccc) !important; border-radius: 4px !important; cursor: pointer !important; background-color: var(--primary-bg-alt, #e9eef2) !important; color: var(--text-color, #2F4858) !important; transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.2s !important; line-height: 1.4 !important; text-align: center !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; white-space: nowrap !important; flex-shrink: 0; }
+.action-button:hover { border-color: var(--header-color, #33658A) !important; background-color: var(--card-border, #dde4e9) !important; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.action-button:disabled, .action-button.disabled { opacity: 0.6 !important; cursor: not-allowed !important; background-color: var(--input-border, #ccc) !important; color: var(--text-muted, #555) !important; border-color: var(--divider-color, #ddd) !important; box-shadow: none !important; }
+
+/*
+============================================================
+| 5. RESUME PROFILE PAGE STYLES                            |
+============================================================
+*/
+
+.pdf-upload-section { text-align: center; margin-bottom: 25px; padding: 20px; background-color: var(--primary-bg); border-radius: 6px; border: 1px solid var(--divider-color); }
+.dynamic-entry-form { border: 1px solid var(--divider-color); padding: 20px; margin-bottom: 25px; border-radius: 6px; background-color: var(--primary-bg); }
+.dynamic-entry-form h4 { margin-top: 0; margin-bottom: 15px; color: var(--header-color); font-size: 1.15em; }
+.form-actions { text-align: right; margin-top: 15px; display:flex; justify-content: flex-end; gap: 10px; }
+.form-actions .primary-action-button, .form-actions .secondary-action-button { margin: 0; } /* Remove auto margins when in flexbox */
+
+.entry-item { border: 1px solid var(--card-border); padding: 15px; margin-bottom: 15px; border-radius: 4px; background-color: var(--input-bg); position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.entry-item h5 { margin: 0 0 5px 0; color: var(--header-color); font-size: 1.1em; }
+.entry-actions { position: absolute; top: 10px; right: 10px; display: flex; gap: 5px; }
+.entry-actions button { font-size: 1em; padding: 0; width: 28px; height: 28px; line-height: 28px; text-align: center; cursor: pointer; border: 1px solid transparent; background-color: transparent; border-radius: 50%; color: var(--text-muted); }
+.entry-actions button:hover { background-color: var(--primary-bg); border-color: var(--divider-color); }
+.no-entries-message { font-style: italic; color: var(--input-placeholder); text-align: center; padding: 20px; background-color: var(--primary-bg); border: 1px dashed var(--divider-color); border-radius: 4px; margin-top: 10px; }
+#parsedResumeJsonPreview { white-space: pre-wrap; word-wrap: break-word; background-color: var(--primary-bg); color: var(--text-color); padding: 15px; border-radius: 4px; max-height: 400px; overflow-y: auto; border: 1px solid var(--divider-color); font-size: 0.85em; line-height: 1.6; }
+
+/*
+============================================================
+| 6. RESUME TAILORING PAGE STYLES                          |
+============================================================
+*/
+
+/* ATS Score Display */
+.overall-ats-score-container { text-align: center; margin-bottom: 20px; padding: 10px 15px; background-color: var(--primary-bg-alt); border-radius: 6px; border: 1px solid var(--card-border); display: none; }
+.overall-ats-score-container .ats-score-title { margin: 0 0 5px 0; color: var(--header-color); font-size: 1.15em; font-weight: bold; }
+.overall-ats-score-container .ats-score-value { font-size: 2.0em; font-weight: bold; color: var(--lapis-lazuli); margin: 5px 0; line-height: 1.1; }
+.overall-ats-score-container .ats-score-context { font-size: 0.85em; color: var(--text-muted); margin: 0; line-height: 1.3; }
+#previewAtsScoreContainer.preview-specific-score { max-width: 179mm; margin: 0 auto 15px auto; }
+
+/* Loading Overlay & Progress */
+.loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255, 255, 255, 0.9); z-index: 1000; display: flex; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(2px); }
+body.theme-dark .loading-overlay, body.theme-system-actual-dark .loading-overlay { background-color: rgba(47, 72, 88, 0.95); }
+.loader-container { padding: 30px; background-color: var(--card-bg); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); color: var(--text-color); }
+.loading-overlay .loader { border: 5px solid var(--loader-track); border-top: 5px solid var(--loader-spinner); border-radius: 50%; width: 50px; height: 50px; animation: spin 1.5s linear infinite; margin: 0 auto 20px auto; }
+.progress-bar-container { width: 80%; max-width: 300px; background-color: var(--input-border); border-radius: 5px; margin: 0 auto 10px auto; height: 20px; overflow: hidden; }
+.progress-bar { width: 0%; height: 100%; background-color: var(--button-primary-bg); border-radius: 5px 0 0 5px; transition: width 0.3s ease-out; }
+
+/* Orange Category Headers */
+.main-category-header-container { display: flex !important; justify-content: space-between !important; align-items: center !important; background-color: var(--button-primary-bg) !important; color: var(--button-primary-text) !important; padding: 0 15px !important; margin-top: 30px; margin-bottom: 0 !important; border-radius: 5px 5px 0 0 !important; }
+#tailoredOutputContainer > .main-category-header-container:first-child, .content-block:first-of-type > .main-category-header-container { margin-top: 15px !important; }
+.main-category-header { font-size: 1.5em !important; font-weight: bold !important; padding: 10px 0 !important; margin: 0 !important; flex-grow: 1 !important; }
+.toggle-section-visibility-btn { background: transparent !important; border: 1px solid var(--button-primary-text) !important; color: var(--button-primary-text) !important; padding: 4px 10px !important; font-size: 0.85em !important; cursor: pointer !important; border-radius: 4px !important; margin-left: 15px !important; }
+.toggle-section-visibility-btn:hover { background-color: rgba(255,255,255,0.2) !important; }
+
+/* Bullet Comparison UI */
+.bullet-comparison { margin-bottom: 20px; padding: 15px; border: 1px solid var(--card-border); border-radius: 4px; background-color: var(--card-bg); }
+.bullet-item { margin-bottom: 10px; transition: opacity 0.3s ease-in-out; }
+.bullet-item + .bullet-item { margin-top: 15px; padding-top: 10px; border-top: 1px dashed var(--divider-color); }
+.bullet-header { font-weight: bold; font-size: 0.95em; color: var(--text-muted); margin-bottom: 5px; }
+.bullet-item ul { list-style-type: none; margin: 0; padding-left: 0; font-size: 1em; line-height: 1.5; }
+.bullet-item ul li { margin-bottom: 6px; padding-left: 20px; position: relative; }
+.bullet-item ul li::before { content: '•'; position: absolute; left: 5px; color: var(--text-muted); font-size: 1.2em; line-height: 1; }
+.bullet-item.user-choice-inactive { opacity: 0.55 !important; }
+
+/* Page Actions Bar (above preview) */
+#mainPageActionsBar.page-actions { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; align-items: center !important; gap: 10px 15px !important; text-align: center; margin-top: 25px; margin-bottom: 20px; padding-top: 15px; border-top: 1px solid var(--divider-color); }
+#contentLengthEstimate { width: 100% !important; flex-basis: 100% !important; order: 2 !important; margin-top: 10px !important; font-size: 0.9em; color: var(--text-muted); display: block; padding: 8px 12px; background-color: var(--primary-bg-alt); border-radius:4px; border: 1px solid var(--divider-color); max-width: 550px; margin-left: auto !important; margin-right: auto !important; text-align: center; line-height: 1.5; }
+#contentLengthEstimate span { padding: 1px 3px; border-radius: 3px; font-weight: bold; }
+
+/* Cover Letter Section */
+.cover-letter-section { margin-top: 30px; }
+.cover-letter-section-title { font-size: 1.5em; text-align: center; }
+
+/*
+============================================================
+| 7. HARVARD RESUME PREVIEW & PRINT STYLES                 |
+============================================================
+*/
+#formattedResumePreviewContainer { margin-top: 30px; padding-top: 20px; border-top: 2px solid var(--divider-color); }
+#formattedResumePreviewContainer > h3 { text-align: center; color: var(--header-color); margin-bottom: 5px; font-size: 1.4em; }
+#formattedResumePreviewContainer > .preview-instructions-subtitle, #formattedResumePreviewContainer > .instructions { text-align:center; font-size:0.85em; margin-bottom: 15px; color: var(--text-muted); }
+.proposal-document-preview { border: 1px solid #999; padding: 20mm 18mm; background-color: white; color: #111; font-family: "Garamond", "Times New Roman", serif; font-size: 11pt; line-height: 1.25; max-width: 179mm; min-height: 240mm; margin: 20px auto; box-shadow: 0 0 15px rgba(0,0,0,0.15); }
+.proposal-document-preview .proposal-name-header { font-size: 16pt !important; font-weight: bold !important; text-align: center !important; margin-bottom: 4pt !important; color:#000 !important; }
+.proposal-document-preview .proposal-contact-info { text-align: center !important; font-size: 10pt !important; margin-bottom: 10pt !important; color: #222 !important; line-height: 1.4 !important; }
+.proposal-document-preview .proposal-contact-info span::after { content: " | "; margin: 0 0.1in; color: #555; }
+.proposal-document-preview .proposal-contact-info span:last-child::after { content: ""; }
+.proposal-document-preview .proposal-section-title-harvard { font-size: 11pt !important; font-weight: bold !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; border-bottom: 0.75pt solid #000 !important; padding-bottom: 1pt !important; margin-bottom: 5pt !important; margin-top:0 !important; color:#000 !important; }
+.proposal-document-preview ul.harvard-bullets { list-style-type: disc !important; list-style-position: outside !important; margin-left: 0.25in !important; padding-left: 0 !important; }
+.proposal-document-preview ul.harvard-bullets li { margin-bottom: 2.5pt !important; line-height:1.35 !important; }
+
+@media print {
+    body, .page-container { margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: none !important; background-color: white !important; width: auto !important; }
+    body > *:not(#formattedResumePreviewContainer),
+    .page-container > *:not(#formattedResumePreviewContainer),
+    #formattedResumePreviewContainer > *:not(#formattedResumePreview) { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; margin:0 !important; padding:0 !important; border:0 !important; }
+    #formattedResumePreviewContainer { display: block !important; position: static !important; margin: 0 !important; padding: 0 !important; border-top: none !important; width: 100% !important; background-color: white !important; }
+    #formattedResumePreviewContainer > h3, #formattedResumePreviewContainer > p, #formattedResumePreviewContainer > .overall-ats-score-container { display: none !important; }
+    .proposal-document-preview { visibility: visible !important; display: block !important; margin: 0.35in 0.65in !important; padding: 0 !important; border: none !important; box-shadow: none !important; width: auto !important; max-width: 100% !important; min-height: auto !important; font-size: 11pt !important; color: #000 !important; background-color: white !important; font-family: "Times New Roman", Times, serif !important; }
+    .proposal-document-preview .proposal-section-title-harvard { page-break-after: avoid !important; }
+    .proposal-document-preview .proposal-entry { page-break-inside: avoid !important; }
+    .proposal-page-break-estimator { display: none !important; }
+}
+
+/*
+============================================================
+| 8. IFRAME-SPECIFIC OVERRIDES                             |
+| These rules apply when a page is loaded inside the panel |
+| to create a seamless, integrated look.                   |
+============================================================
+*/
+
+/* When any page's body has this class, its main container should blend in */
+body.in-iframe-panel .page-container {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 15px 20px; /* Adjust padding for a tighter fit in the panel */
+    max-width: 100%; /* Allow it to fill the iframe's width */
+}
+
+/* Specific tweak for the options page container to ensure it doesn't get too wide */
+body.in-iframe-panel .page-container.options-page-container {
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,383 @@
+/* resume_profile.css - V2 - With collapsible section logic. */
+/* Variables are inherited from options/options.css */
+
+/* === General Page Styles === */
+body {
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    margin: 0;
+}
+
+.page-container.profile-page {
+    max-width: 850px;
+}
+
+/* === PDF Upload Section Styles === */
+.pdf-upload-section {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: var(--primary-bg-alt);
+    border-radius: 6px;
+    border: 1px solid var(--divider-color);
+}
+
+.input-action-group {
+    margin-bottom: 15px;
+}
+
+label.file-input-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+input[type="file"]#resumePdfUploadInput {
+    display: block;
+    margin: 5px auto 15px auto;
+    padding: 10px;
+    border: 1px dashed var(--link-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    color: var(--input-placeholder);
+}
+
+input[type="file"]#resumePdfUploadInput::file-selector-button {
+    padding: 8px 15px;
+    margin-right: 10px;
+    background-color: var(--button-secondary-bg);
+    color: var(--button-secondary-text);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+input[type="file"]#resumePdfUploadInput::file-selector-button:hover {
+    background-color: var(--button-secondary-hover-bg);
+}
+
+button#processResumeButton.primary-action-button {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    margin-top: 5px;
+}
+
+/* === Main Sections & Dividers === */
+.profile-section.setting-container {
+    padding: 20px; /* Reduced from 25px for a tighter feel */
+}
+
+.profile-section h3 {
+    margin: 0;
+    padding: 0;
+    border: none; /* Let the section-header handle the border */
+}
+
+/* === DYNAMIC ENTRY UI === */
+.dynamic-entry-form {
+    border: 1px solid var(--divider-color);
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    background-color: var(--primary-bg-alt);
+}
+
+.dynamic-entry-form h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--header-color);
+    font-size: 1.15em;
+}
+
+.dynamic-entry-form label {
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.dynamic-entry-form input[type="text"],
+.dynamic-entry-form textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 0.95em;
+}
+
+/* Display area for added/rendered entries */
+.entry-item {
+    border: 1px solid var(--card-border);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    background-color: var(--primary-bg-alt);
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.entry-item h5 {
+    margin: 0 0 5px 0;
+    color: var(--header-color);
+    font-size: 1.1em;
+}
+
+.entry-item p,
+.entry-item .company-dates {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.entry-item ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-left: 0;
+    font-size: 0.95em;
+    color: var(--text-color);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.entry-item ul li {
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.entry-item h6 {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: var(--text-muted);
+    margin-top: 8px;
+    margin-bottom: 3px;
+}
+
+.entry-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.entry-actions button {
+    font-size: 1em;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background-color: transparent;
+    border-radius: 50%;
+    color: var(--text-muted);
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.entry-actions button:hover {
+    background-color: var(--card-bg);
+    border-color: var(--divider-color);
+}
+
+.no-entries-message {
+    font-style: italic;
+    color: var(--input-placeholder);
+    text-align: center;
+    padding: 20px;
+    background-color: var(--primary-bg-alt);
+    border: 1px dashed var(--divider-color);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+/* Save Full Profile Button Area */
+.save-profile-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button#saveProfileButton.primary-action-button {
+    padding: 12px 30px;
+    font-size: 1.15em;
+}
+
+/* === Status messages & Debug Preview === */
+#pdfProcessStatus,
+#profileSaveStatus {
+    min-height: 20px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#extractedResumeDataDisplay {
+    margin-top: 30px;
+}
+
+#parsedResumeJsonPreview {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: var(--primary-bg-alt);
+    color: var(--text-color);
+    padding: 15px;
+    border-radius: 4px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--divider-color);
+    font-size: 0.85em;
+    line-height: 1.6;
+}
+
+.form-grid-3-col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+
+/*
+============================================================
+|               *** NEW STYLES FOR COLLAPSE ***            |
+============================================================
+*/
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--divider-color);
+    margin-bottom: 20px;
+}
+
+.pdf-upload-section .section-header,
+#extractedResumeDataDisplay .section-header {
+    border-bottom: none;
+    margin-bottom: 15px;
+    padding-bottom: 0;
+}
+
+.section-header > h2,
+.section-header > h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.4em;
+    color: var(--header-color);
+}
+
+.section-toggle-button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease-in-out, background-color 0.2s;
+}
+
+.section-toggle-button:hover {
+    background-color: var(--primary-bg-alt);
+}
+
+.section-collapsible:not(.is-expanded) .section-content {
+    display: none;
+}
+
+.section-toggle-button[aria-expanded="false"] {
+    transform: rotate(-90deg);
+}
+
+.section-toggle-button[aria-expanded="true"] {
+    transform: rotate(0deg);
+}
+
+.primary-action-button.saved-successfully {
+    background-color: var(--status-success-text); /* A satisfying green color */
+    cursor: default;
+    opacity: 0.9;
+}
+/* START SNIPPET: Append these styles to organization_profile.css */
+.form-grid-2-col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--divider-color);
+    margin-bottom: 20px;
+}
+
+.pdf-upload-section .section-header {
+    border-bottom: none;
+    margin-bottom: 15px;
+    padding-bottom: 0;
+}
+
+.section-header > h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.4em;
+    color: var(--header-color);
+}
+
+.section-toggle-button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease-in-out, background-color 0.2s;
+}
+
+.section-toggle-button:hover {
+    background-color: var(--primary-bg-alt);
+}
+
+.section-collapsible:not(.is-expanded) .section-content {
+    display: none;
+}
+
+.section-toggle-button[aria-expanded="false"] {
+    transform: rotate(-90deg);
+}
+
+.primary-action-button.saved-successfully {
+    background-color: var(--status-success-text);
+    cursor: default;
+    opacity: 0.9;
+}
+/* END SNIPPET */

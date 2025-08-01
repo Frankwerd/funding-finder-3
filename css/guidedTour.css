@@ -1,0 +1,270 @@
+/* guidedTour.css */
+
+:root {
+    /* Define some default tour variables, can be overridden by theme variables if needed */
+    --tour-bg-color: var(--system-background, #ffffff);
+    --tour-text-color: var(--text-primary, #212529);
+    --tour-border-color: var(--system-border-color, #dee2e6);
+    --tour-shadow-color: rgba(0, 0, 0, 0.15);
+    --tour-button-bg-color: var(--primary-accent, #007bff);
+    --tour-button-text-color: var(--button-text-color, #ffffff);
+    --tour-button-hover-bg-color: var(--primary-accent-dark, #0056b3);
+}
+
+.guided-tour-chat-box {
+    position: absolute; /* Will be overridden by JS if targetSelector is used, but good default */
+    z-index: 10000; /* Ensure it's on top of most elements */
+    background-color: var(--tour-bg-color);
+    color: var(--tour-text-color);
+    border: 1px solid var(--tour-border-color);
+    border-radius: 8px;
+    padding: 15px 20px;
+    max-width: 320px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.18); /* Updated shadow */
+    font-size: 14px;
+    line-height: 1.6;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0; /* Start hidden for fade-in animation */
+    transform: translateY(10px); /* Start slightly offset for animation */
+    animation: fadeInTourBox 0.3s forwards;
+}
+
+@keyframes fadeInTourBox {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.guided-tour-chat-box p {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.guided-tour-chat-box p strong {
+    color: var(--primary-accent, #007bff); /* Highlight strong tags */
+}
+
+.guided-tour-chat-box button {
+    background-color: var(--tour-button-bg-color);
+    color: var(--tour-button-text-color);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: block; /* Make button take full width of its container */
+    margin-top: 10px; /* Add some space if there are multiple paragraphs or elements */
+    width: 100%; /* Make button more prominent */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.guided-tour-chat-box button:hover {
+    background-color: var(--tour-button-hover-bg-color);
+}
+
+/* Arrow styles */
+.guided-tour-chat-box::before,
+.guided-tour-chat-box::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+/* Arrow pointing up (box is below the target) */
+.guided-tour-chat-box.arrow-up::before {
+    top: -10px; /* Arrow size */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 10px 10px 10px; /* Arrow size */
+    border-color: transparent transparent var(--tour-border-color) transparent;
+}
+
+.guided-tour-chat-box.arrow-up::after {
+    top: -9px; /* Slightly smaller to create border effect */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 9px 9px 9px; /* Corresponds to above */
+    border-color: transparent transparent var(--tour-bg-color) transparent;
+}
+
+/* Arrow pointing down (box is above the target) */
+.guided-tour-chat-box.arrow-down::before {
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 10px 0 10px;
+    border-color: var(--tour-border-color) transparent transparent transparent;
+}
+
+.guided-tour-chat-box.arrow-down::after {
+    bottom: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 9px 9px 0 9px;
+    border-color: var(--tour-bg-color) transparent transparent transparent;
+}
+
+/* Arrow pointing left (box is to the right of the target) */
+.guided-tour-chat-box.arrow-left::before {
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    border-width: 10px 10px 10px 0;
+    border-color: transparent var(--tour-border-color) transparent transparent;
+}
+
+.guided-tour-chat-box.arrow-left::after {
+    top: 50%;
+    left: -9px;
+    transform: translateY(-50%);
+    border-width: 9px 9px 9px 0;
+    border-color: transparent var(--tour-bg-color) transparent transparent;
+}
+
+/* Arrow pointing right (box is to the left of the target) */
+.guided-tour-chat-box.arrow-right::before {
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent var(--tour-border-color);
+}
+
+.guided-tour-chat-box.arrow-right::after {
+    top: 50%;
+    right: -9px;
+    transform: translateY(-50%);
+    border-width: 9px 0 9px 9px;
+    border-color: transparent transparent transparent var(--tour-bg-color);
+}
+
+/* Centered chat box (no arrow or specific target) */
+.guided-tour-chat-box.position-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* No arrow needed for centered, but ensure no arrow class is accidentally applied or override here */
+}
+.guided-tour-chat-box.position-center::before,
+.guided-tour-chat-box.position-center::after {
+    display: none; /* Hide arrows for centered box */
+}
+
+/* Specific adjustments for arrow positions if not perfectly centered on the box side */
+/* Example: if the box is wide and arrow should be more to one side */
+.guided-tour-chat-box.arrow-up.arrow-offset-left::before,
+.guided-tour-chat-box.arrow-up.arrow-offset-left::after {
+    left: 30px; /* Adjust as needed */
+}
+
+.guided-tour-chat-box.arrow-up.arrow-offset-right::before,
+.guided-tour-chat-box.arrow-up.arrow-offset-right::after {
+    left: auto;
+    right: 30px; /* Adjust as needed */
+    transform: translateX(0); /* Reset transform if 'left' is used */
+}
+/* Add similar for other arrow directions if needed */
+
+/* Ensure button text is readable against various theme backgrounds */
+.guided-tour-chat-box button {
+    /* Fallback for themes where variables might not provide enough contrast */
+    /* This might need adjustment based on the actual theme colors */
+    /* For instance, if --tour-button-bg-color is light, text should be dark */
+}
+/* Consider adding a class for a "secondary" or "dismiss" button if needed later */
+/*
+.guided-tour-chat-box button.secondary {
+    background-color: var(--grey-light, #f0f0f0);
+    color: var(--text-secondary, #555);
+}
+.guided-tour-chat-box button.secondary:hover {
+    background-color: var(--grey-medium, #e0e0e0);
+}
+*/
+#guidedTourChatBox.arrow-up.position-bottom_right_of_target::before,
+#guidedTourChatBox.arrow-up.position-bottom_right_of_target::after {
+    left: calc(100% - 30px); /* Position arrow towards the right end of the box */
+}
+#guidedTourChatBox.arrow-up.position-bottom_left_of_target::before,
+#guidedTourChatBox.arrow-up.position-bottom_left_of_target::after {
+    left: 30px; /* Position arrow towards the left end of the box */
+}
+#guidedTourChatBox.arrow-down.position-top_right_of_target::before,
+#guidedTourChatBox.arrow-down.position-top_right_of_target::after {
+    left: calc(100% - 30px);
+}
+
+#guidedTourChatBox.arrow-down.position-top_left_of_target::before,
+#guidedTourChatBox.arrow-down.position-top_left_of_target::after {
+    left: 30px;
+}
+
+#guidedTourChatBox.arrow-left.position-right_top_of_target::before,
+#guidedTourChatBox.arrow-left.position-right_top_of_target::after {
+    top: 30px; /* Position arrow towards the top end of the box */
+}
+#guidedTourChatBox.arrow-left.position-right_bottom_of_target::before,
+#guidedTourChatBox.arrow-left.position-right_bottom_of_target::after {
+    top: calc(100% - 30px); /* Position arrow towards the bottom end of the box */
+}
+
+#guidedTourChatBox.arrow-right.position-left_top_of_target::before,
+#guidedTourChatBox.arrow-right.position-left_top_of_target::after {
+    top: 30px;
+}
+#guidedTourChatBox.arrow-right.position-left_bottom_of_target::before,
+#guidedTourChatBox.arrow-right.position-left_bottom_of_target::after {
+    top: calc(100% - 30px);
+}
+
+/* Default position for general notifications (no target) */
+.guided-tour-chat-box.no-target {
+    bottom: 20px;
+    right: 20px;
+    /* No arrows for no-target */
+}
+.guided-tour-chat-box.no-target::before,
+.guided-tour-chat-box.no-target::after {
+    display:none;
+}
+
+/* === ADD THIS ENTIRE BLOCK FOR INVERTED TUTORIAL THEME === */
+
+/* When the page is in LIGHT mode, use DARK colors for the tour box */
+body.theme-light .guided-tour-chat-box,
+body.theme-system-actual-light .guided-tour-chat-box {
+    --tour-bg-color: #2F4858;                     /* Dark BG */
+    --tour-text-color: #E0E5EA;                  /* Light Text */
+    --tour-border-color: #4a6070;                 /* Dark Border */
+    --tour-button-bg-color: #F6AE2D;              /* Dark Mode Primary Button (Yellow) */
+    --tour-button-text-color: #2F4858;            /* Dark Text for Yellow Button */
+    --tour-button-hover-bg-color: #dAA027;        /* Dark Mode Button Hover */
+}
+
+/* When the page is in DARK mode, use LIGHT colors for the tour box */
+body.theme-dark .guided-tour-chat-box,
+body.theme-system-actual-dark .guided-tour-chat-box {
+    --tour-bg-color: #f0f4f8;                     /* Light BG */
+    --tour-text-color: #2F4858;                  /* Dark Text */
+    --tour-border-color: #dde4e9;                 /* Light Border */
+    --tour-button-bg-color: #F26419;              /* Light Mode Primary Button (Orange) */
+    --tour-button-text-color: white;             /* Light Text for Orange Button */
+    --tour-button-hover-bg-color: #d4530f;        /* Light Mode Button Hover */
+}
+
+/* Ensure strong tags in the prompt also use the inverted text color */
+body.theme-light .guided-tour-chat-box p strong,
+body.theme-system-actual-light .guided-tour-chat-box p strong {
+    color: var(--carolina-blue); /* A light blue that works well on the dark BG */
+}
+
+body.theme-dark .guided-tour-chat-box p strong,
+body.theme-system-actual-dark .guided-tour-chat-box p strong {
+    color: var(--lapis-lazuli); /* A dark blue that works well on the light BG */
+}
+/* === END OF BLOCK TO ADD === */

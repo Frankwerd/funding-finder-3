@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<!-- In tailoring/tailor_proposal.html -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FundingFlock.AI - Proposal Tailoring</title>
+
+    <!-- CORRECTED PATHS (going up one level) -->
+<link rel="stylesheet" href="../options/options.css">
+<link rel="stylesheet" href="./tailor_proposal.css"> <!-- Local file, ./ is fine -->
+    <link rel="stylesheet" href="../css/guidedTour.css">
+</head>
+<body>
+    <div class="page-container tailoring-page">
+
+<!-- START SNIPPET: Paste this block into the .page-container of tailor_proposal.html -->
+<div class="page-banner"></div>
+
+<header class="page-header">
+    <h1>Proposal Tailoring Assistant</h1>
+    <p>Target Opportunity: <strong id="targetJobTitle">Loading...</strong> from <strong id="targetCompany">Loading...</strong></p>
+</header>
+
+<div id="globalLoadingScreen" class="loading-overlay">
+    <div class="loader-container">
+        <div class="loader"></div>
+        <p id="loadingStatusMessage">Initializing tailoring process...</p>
+        <div class="progress-bar-container">
+            <div id="tailoringProgressBar" class="progress-bar"></div>
+        </div>
+        <p id="progressPercentage">0%</p>
+    </div>
+</div>
+
+<div id="globalErrorMessage" class="status-message-global status-error" style="display:none;"></div>
+
+<div id="globalSectionControls" style="text-align: right; margin-bottom: 15px; display: none;">
+    <button id="toggleAllSectionsButton" class="secondary-action-button action-button" title="Collapse/Expand all tailoring sections below">Collapse All</button>
+</div>
+
+<div id="tailoredOutputContainer">
+    <!-- AI-generated narrative sections will be dynamically inserted here by tailor_proposal.js -->
+</div>
+
+<div class="page-actions" id="mainPageActionsBar" style="display:none;">
+    <button id="autofillActivePageButton" class="primary-action-button action-button">Autofill from Proposal</button>
+    <button id="copyProposalTextButton" class="secondary-action-button action-button">Copy All Proposal Text</button>
+    <span id="copyStatus" class="status-message-inline" style="display: none;"></span>
+</div>
+
+<div id="notesSection" class="setting-container" style="display: none; margin-top: 30px;">
+    <h2 style="text-align: center; color: var(--header-color);">My Notes & Scratchpad</h2>
+    <p class="instructions">
+        Use this area for personal notes, brainstorming, or to assemble your final proposal text. This content is not sent to the AI.
+    </p>
+    <textarea id="notesTextarea" rows="15" placeholder="Your notes for this grant opportunity..."></textarea>
+    <div style="text-align: right; margin-top: 10px;">
+        <button id="copyNotesButton" class="secondary-action-button action-button">Copy Notes</button>
+    </div>
+</div>
+
+<div class="page-actions main-action-bar" style="border-top: 1px solid var(--divider-color); margin-top: 30px; padding-top: 20px; display:none;">
+     <p style="font-size:0.8em; color:var(--text-muted);">End of Page Actions.</p>
+</div>
+<!-- END SNIPPET -->
+    </div> <!-- End of .page-container -->
+
+<!-- SCRIPT TAGS AT THE END OF BODY (CORRECTED) -->
+<script src="../theme_handler.js" defer></script>
+<script src="../js/guidedTour.js" defer></script>
+<script src="../js/proposalTailoringTour.js" defer></script>
+<script src="./tailor_proposal.js" defer></script>
+</body>
+</html>

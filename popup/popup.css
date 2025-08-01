@@ -1,0 +1,169 @@
+/* popup/popup.css */
+
+/* Variables inherited from options/options.css */
+
+body {
+    font-family: var(--font-main);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    overflow-x: hidden;
+    overflow-y: auto; /* <<< ADDED: Allow vertical scrolling within popup's body if its content overflows its own height (limited by iframe) */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.container.popup-container {
+    width: 100%;
+    max-width: 380px; /* Max width of the content block within the iframe */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px; /* Internal padding for the content block */
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Makes this container take up available vertical space in body */
+}
+
+/* No .popup-header styles needed as it's removed from HTML */
+
+.popup-action-button {
+    padding: 10px 15px;
+    font-size: 0.95em;
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.popup-action-button.secondary-action-button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.status-message-popup {
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    border: 1px solid transparent;
+    width: 100%;
+    box-sizing: border-box;
+}
+#loadingIndicator p {
+    margin:0;
+    color: var(--loader-spinner);
+}
+.error-message-specific,
+#errorMessage.status-message-popup {
+    background-color: var(--status-error-bg);
+    color: var(--status-error-text);
+    border-color: var(--status-error-border);
+}
+
+#resultsArea {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding: 12px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 5px;
+    width: 100%;
+    min-height: 50px;
+    max-height: 200px; /* If results get very long, they'll scroll within this area */
+    overflow-y: auto;
+    box-sizing: border-box;
+    font-size: 0.9em;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+#resultsArea .placeholder-text {
+    color: var(--input-placeholder);
+    font-style: italic;
+    text-align: center;
+    padding-top: 10px;
+}
+#resultsArea h3, #resultsArea h4 {
+    color: var(--header-color);
+    margin-top: 8px; margin-bottom: 4px; font-size: 1.05em;
+}
+#resultsArea h3:first-child, #resultsArea h4:first-child { margin-top: 0; }
+#resultsArea ul { padding-left: 18px; margin-top: 3px; margin-bottom: 8px; }
+#resultsArea li { margin-bottom: 2px; }
+
+#resumeTailoringSection {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.weekly-stats-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.weekly-stats-title {
+    margin-top: 0; margin-bottom: 10px;
+    font-size: 1em; color: var(--header-color);
+    text-align: center; padding-bottom: 5px;
+    border-bottom: 1px solid var(--divider-color);
+}
+#weeklyStatsLoadingMessage {
+    font-size: 0.85em; text-align: center; margin-bottom: 5px;
+    color: var(--loader-spinner); font-style: italic;
+}
+.weekly-stats-section .chart-container {
+    margin-top: 5px;
+}
+#weeklyAppsChartCanvas {
+    max-width: 100%; display: block;
+}
+.no-weekly-data-message {
+    font-style: italic; color: var(--input-placeholder);
+    text-align: center; padding: 10px 5px; font-size: 0.9em;
+}
+
+footer {
+    margin-top: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid var(--divider-color);
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+.page-link {
+    font-size: 0.9em;
+    color: var(--link-color);
+    text-decoration: none;
+}
+.page-link:hover {
+    text-decoration: underline;
+    color: var(--link-hover-color);
+}
+
+/* Scrollbar styling for dark mode for #resultsArea */
+body.theme-dark #resultsArea::-webkit-scrollbar,
+body.theme-system-actual-dark #resultsArea::-webkit-scrollbar { width: 8px; }
+body.theme-dark #resultsArea::-webkit-scrollbar-track,
+body.theme-system-actual-dark #resultsArea::-webkit-scrollbar-track { background: var(--primary-bg); }
+body.theme-dark #resultsArea::-webkit-scrollbar-thumb,
+body.theme-system-actual-dark #resultsArea::-webkit-scrollbar-thumb { background-color: var(--button-secondary-bg); border-radius: 4px; border: 2px solid var(--primary-bg); }
+
+.loader {
+    border: 3px solid var(--primary-bg-alt);
+    border-top: 3px solid var(--loader-spinner);
+    border-radius: 50%; width: 20px; height: 20px;
+    animation: spin 1s linear infinite; margin: 10px auto; display: none;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

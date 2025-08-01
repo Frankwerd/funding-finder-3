@@ -1,0 +1,565 @@
+/* tailor_resume.css - Full file with RESUME PREVIEW formatting fixed and isolated. */
+
+/* === General Page Styles (Themed) === */
+body {
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0; /* <<< REMOVE body padding, .page-container will handle it */
+    width: 100%;
+    /* No min-height: 100vh; let content dictate height for panel sizing */
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal scroll within its own body */
+    overflow-y: auto;   /* Allow vertical scroll if content taller than iframe */
+    display: flex; /* If you want to center .page-container */
+    flex-direction: column;
+    align-items: center; /* Horizontally center .page-container */
+}
+
+.page-container.tailoring-page {
+    padding: 25px; /* This becomes the main padding for the content */
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid var(--card-border);
+    box-sizing: border-box;
+    width: 100%; /* Use full width given by body */
+    max-width: 900px;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* If its body is flex, this will allow it to try and fill vertical space */
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--divider-color);
+}
+.page-header h1 {
+    color: var(--header-color);
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.8em;
+}
+.page-header p {
+    font-size: 1em;
+    color: var(--text-muted);
+}
+
+#globalSectionControls {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+#globalSectionControls .action-button {
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* === Loading UI (Themed) === */
+/* Loading Overlay & Progress */
+.loading-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    backdrop-filter: blur(2px);
+}
+body.theme-dark .loading-overlay,
+body.theme-system-actual-dark .loading-overlay {
+    background-color: rgba(47, 72, 88, 0.95);
+}
+.loader-container {
+    padding: 30px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    color: var(--text-color);
+}
+.loading-overlay .loader {
+    border: 5px solid var(--loader-track);
+    border-top: 5px solid var(--loader-spinner);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1.5s linear infinite;
+    margin: 0 auto 20px auto;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+#loadingStatusMessage { font-size: 1.1em; margin-bottom: 15px; color: var(--text-color); }
+
+.progress-bar-container {
+    width: 80%; max-width: 300px;
+    background-color: var(--input-border);
+    border-radius: 5px;
+    margin: 0 auto 10px auto;
+    height: 20px;
+    overflow: hidden;
+}
+.progress-bar {
+    width: 0%; height: 100%;
+    background-color: var(--button-primary-bg);
+    border-radius: 5px 0 0 5px;
+    transition: width 0.3s ease-out;
+    text-align: center;
+    line-height: 20px;
+    color: var(--button-primary-text);
+    font-size: 0.8em;
+    font-weight: bold;
+}
+#progressPercentage { font-size: 0.9em; color: var(--text-muted); }
+
+/* === Main Category Headers === */
+.main-category-header-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background-color: var(--button-primary-bg) !important;
+    color: var(--button-primary-text) !important;
+    padding: 0 15px !important;
+    margin-top: 30px;
+    margin-bottom: 0 !important;
+    border-radius: 5px 5px 0 0 !important;
+}
+#tailoredOutputContainer > .main-category-header-container:first-child,
+#summaryTailoringSection > .main-category-header-container:first-of-type,
+#skillsTailoringSection > .main-category-header-container:first-of-type,
+#experienceTailoringSectionContainer > .main-category-header-container:first-of-type,
+#projectsTailoringSectionContainer > .main-category-header-container:first-of-type {
+    margin-top: 15px !important;
+}
+.main-category-header-container .main-category-header {
+    font-size: 1.5em !important;
+    font-weight: bold !important;
+    padding: 10px 0 !important;
+    margin: 0 !important;
+    flex-grow: 1 !important;
+}
+.main-category-header-container .toggle-section-visibility-btn {
+    background: transparent !important;
+    border: 1px solid var(--button-primary-text) !important;
+    color: var(--button-primary-text) !important;
+    padding: 4px 10px !important;
+    font-size: 0.85em !important;
+    cursor: pointer !important;
+    border-radius: 4px !important;
+    margin-left: 15px !important;
+}
+.main-category-header-container .toggle-section-visibility-btn:hover {
+    background-color: rgba(255,255,255,0.2) !important;
+}
+
+/* === Section Content & Visibility === */
+.content-wrapper-for-toggle {
+    background-color: var(--primary-bg-alt);
+    border: 1px solid var(--divider-color);
+    border-top: none !important;
+    border-radius: 0 0 6px 6px !important;
+    padding: 20px 25px 25px 25px !important;
+    margin-top: 0 !important;
+}
+.content-wrapper-for-toggle.collapsed {
+    display: none !important;
+}
+
+.experience-block.collapsed, .project-block.collapsed,
+.section-container > .no-entries-message.collapsed {
+    display: none !important;
+}
+
+.section-container {
+    margin-bottom: 25px;
+}
+.section-container .no-entries-message {
+    display: block;
+    padding: 20px;
+    background-color: var(--primary-bg-alt);
+    border: 1px dashed var(--divider-color);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+    margin-top: 5px;
+}
+.content-block {
+    margin-bottom: 30px !important;
+}
+.content-block > .content-wrapper-for-toggle > h3 {
+    color: var(--header-color) !important;
+    font-size: 1.3em !important;
+    margin: 0 0 20px 0 !important;
+    text-align: center !important;
+}
+
+/* === Experience & Project Item Blocks === */
+.experience-block, .project-block {
+    background-color: var(--primary-bg-alt);
+    border: 1px solid var(--divider-color);
+    border-radius: 6px;
+    padding: 15px 20px 20px 20px;
+    margin-bottom: 20px;
+}
+.experience-block:last-child, .project-block:last-child {
+    margin-bottom: 0;
+}
+.experience-block > h3, .project-block > h3 {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin:0 0 8px 0 !important;
+    cursor: pointer;
+}
+.experience-block > h3 .entry-title-text, .project-block > h3 .entry-title-text {
+    font-size: 1.3em !important;
+    color: var(--header-color) !important;
+    flex-grow: 1;
+}
+.toggle-entry-details {
+    background: none !important;
+    border: 1px solid var(--input-border) !important;
+    color: var(--text-muted) !important;
+    padding: 3px 7px !important;
+    font-size: 0.85em !important;
+    cursor: pointer !important;
+    border-radius: 4px !important;
+    margin-left: 10px !important;
+}
+.toggle-entry-details:hover {
+    border-color: var(--header-color) !important;
+    background-color: var(--card-border) !important;
+}
+.entry-content-collapsible {
+    padding-top: 5px;
+}
+.entry-content-collapsible.collapsed {
+    display: none !important;
+}
+
+/* === Action Buttons === */
+.bullet-actions, .summary-actions {
+    margin-top: 15px !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    display: flex !important;
+    gap: 10px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+.skills-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.action-button {
+    font-family: var(--font-main) !important;
+    font-size: 0.9em !important;
+    padding: 6px 12px !important;
+    border: 1px solid var(--input-border) !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    background-color: var(--primary-bg-alt) !important;
+    color: var(--text-color) !important;
+    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.2s !important;
+}
+.action-button:hover {
+    border-color: var(--header-color) !important;
+    background-color: var(--card-border) !important;
+}
+.action-button:disabled, .action-button.disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    background-color: var(--input-border) !important;
+    color: var(--text-muted) !important;
+    border-color: var(--divider-color) !important;
+}
+.action-button.accept-summary-btn.selected, .action-button.accept-bullet-btn.selected, .bullet-actions > .action-button.accept-btn.selected {
+    background-color: var(--status-success-text) !important;
+    color: white !important; font-weight: bold !important;
+    border-color: var(--status-success-text) !important;
+}
+.action-button.reject-summary-btn.selected, .action-button.reject-bullet-btn.selected, .bullet-actions > .action-button.reject-btn.selected {
+    background-color: var(--status-info-bg) !important;
+    color: var(--status-info-text) !important;
+    font-weight: bold !important;
+    border-color: var(--status-info-border) !important;
+}
+.save-line-btn.action-button, .save-description-btn.action-button, .save-summary-btn.action-button, .save-skills-btn.action-button {
+    border-color: var(--link-color) !important;
+    color: var(--link-color) !important;
+    background-color: var(--card-bg) !important;
+    position: static !important;
+    opacity: 1 !important;
+}
+.save-line-btn.action-button:hover, .save-description-btn.action-button:hover, .save-summary-btn.action-button:hover, .save-skills-btn.action-button:hover {
+    background-color: var(--link-color) !important;
+    color: white !important;
+    border-color: var(--link-color) !important;
+}
+.summary-actions > .save-summary-btn.action-button,
+.bullet-actions > .save-description-btn.action-button,
+.bullet-actions > .save-line-btn.action-button,
+.skills-actions > .save-skills-btn.action-button {
+    margin-left: auto !important;
+}
+.action-button.saved {
+    background-color: var(--status-success-bg) !important;
+    color: var(--status-success-text) !important;
+    border-color: var(--status-success-border) !important;
+}
+.action-button.saved-error {
+    background-color: var(--status-error-bg) !important;
+    color: var(--status-error-text) !important;
+    border-color: var(--status-error-border) !important;
+}
+
+/* Page Actions & Status Messages */
+#mainPageActionsBar.page-actions {
+    margin-top: auto; /* Push it towards the bottom of .page-container */
+    flex-shrink: 0; /* Prevent it from shrinking */
+    padding-top: 15px;
+    border-top: 1px solid var(--divider-color);
+}
+#contentLengthEstimate {
+    width: 100% !important;
+    flex-basis: 100% !important;
+    order: 2 !important;
+    margin-top: 10px !important;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    display: none;
+    padding: 8px 12px;
+    background-color: var(--primary-bg-alt);
+    border-radius:4px;
+    border: 1px solid var(--divider-color);
+    max-width: 550px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center;
+    line-height: 1.5;
+}
+#contentLengthEstimate span {
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.status-message-inline {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    vertical-align: middle;
+    border: 1px solid transparent;
+}
+.status-message-inline.success, .status-message-global.status-success {
+    background-color:var(--status-success-bg);
+    color:var(--status-success-text);
+    border-color: var(--status-success-border);
+}
+.status-message-inline.error, .status-message-global.status-error {
+    background-color:var(--status-error-bg);
+    color:var(--status-error-text);
+    border-color: var(--status-error-border);
+}
+
+/* === Cover Letter Section (Single Column, Final Layout) === */
+
+.cover-letter-section {
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.cl-single-column-container {
+    display: flex;
+    flex-direction: column; /* Stack all items vertically */
+    width: 100%;
+    margin: 0 auto;
+    max-width: 750px; /* Constrain the max width for readability */
+}
+
+.cover-letter-section-title {
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--header-color);
+    font-size: 1.8em;
+}
+
+.cover-letter-section .instructions {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1em;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 30px auto; /* Center and add space below */
+}
+
+/* Header for the Textarea: Label + Generate Button */
+.cl-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Align to bottom for a clean look */
+    width: 100%;
+    margin-bottom: 12px;
+}
+.cl-header-row .textarea-label {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: var(--header-color);
+}
+.cover-letter-action-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.cover-letter-action-group .loader {
+    width: 20px;
+    height: 20px;
+    border-width: 3px;
+    margin: 0;
+}
+.cover-letter-action-group span {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+/* The Textarea Itself */
+#generatedCoverLetterTextarea {
+    width: 100%; /* << Makes it span end-to-end */
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 350px;
+}
+
+/* Footer for the Copy Button */
+.cl-footer-actions {
+    display: flex;
+    justify-content: flex-end; /* Pushes button to the right */
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* START: New Narrative Section Styles */
+
+.content-wrapper-for-toggle .instructions {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.narrative-score {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: var(--header-color);
+}
+
+.narrative-score .score-value {
+    font-weight: bold;
+    color: var(--lapis-lazuli);
+    padding: 3px 8px;
+    background-color: var(--primary-bg);
+    border-radius: 4px;
+    border: 1px solid var(--divider-color);
+}
+
+.narrative-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 250px;
+    resize: vertical;
+    line-height: 1.6;
+    font-family: var(--font-main);
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.narrative-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* END: New Narrative Section Styles */
+/* START SNIPPET: Append these styles to tailor_proposal.css */
+/* General Layout */
+.page-container.tailoring-page {
+    max-width: 900px;
+}
+
+.content-block {
+    margin-bottom: 30px;
+}
+
+/* Narrative Section Styles */
+.content-wrapper-for-toggle .instructions {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.narrative-score {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: var(--header-color);
+}
+
+.narrative-score .score-value {
+    font-weight: bold;
+    color: var(--lapis-lazuli);
+    padding: 3px 8px;
+    background-color: var(--primary-bg);
+    border-radius: 4px;
+    border: 1px solid var(--divider-color);
+}
+
+.narrative-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 250px;
+    resize: vertical;
+    line-height: 1.6;
+    font-family: var(--font-main);
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.narrative-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Page Actions Bar */
+#mainPageActionsBar.page-actions {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid var(--divider-color);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+/* END SNIPPET */

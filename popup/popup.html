@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>FundingFlock.AI Analyzer</title>
+
+    <!-- Libraries & Scripts -->
+    <script src="../libs/chart.umd.min.js" defer></script>
+    <script src="../theme_handler.js" defer></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../options/options.css"> <!-- Master theme variables -->
+    <link rel="stylesheet" href="popup.css">           <!-- Popup specific styles -->
+    <link rel="stylesheet" href="../css/guidedTour.css"> <!-- Guided Tour styles -->
+</head>
+<body>
+    <div class="container popup-container">
+
+        <button id="proposalTailoringSessionButton" class="popup-action-button secondary-action-button" style="display:none;">
+            Resume Last Proposal Session
+        </button>
+
+        <button id="analyzeButton" class="popup-action-button primary-action-button">Analyze Funding Opportunity</button>
+
+        <div id="loadingIndicator" class="status-message-popup" style="display:none;"><p>Analyzing...</p></div>
+        <div id="errorMessage" class="status-message-popup error-message-specific" style="display:none;"></div>
+
+        <div id="resultsArea">
+            <p class="placeholder-text">Click "Analyze" to see AI insights for this opportunity.</p>
+        </div>
+
+        <div id="proposalTailoringSection" style="display:none;">
+            <button id="tailorProposalButton" class="popup-action-button">Tailor Proposal for this Opportunity</button>
+        </div>
+
+        <button id="masterAutofillButton" class="popup-action-button secondary-action-button" style="display:none; margin-bottom: 15px;">Autofill from Org. Profile</button>
+
+        <div id="weeklyStatsSection" class="weekly-stats-section" style="display:none;">
+            <h4 class="weekly-stats-title">Recent Application Activity</h4>
+            <div id="weeklyStatsLoadingMessage" style="text-align: center; color: var(--text-muted); font-style: italic; font-size: 0.9em;">Loading chart...</div>
+            <div id="weeklyStatsErrorMessage" class="status-message-popup error-message-specific" style="display:none;"></div>
+            <div class="chart-container" style="position: relative; height:160px; width:100%;"><canvas id="weeklyAppsChartCanvas"></canvas></div>
+        </div>
+        
+        <button id="openTrackerSheetButton" class="popup-action-button secondary-action-button">Access My Grant Tracker</button>
+        <button id="logoutButton" class="popup-action-button secondary-action-button" style="display:none; margin-top: -5px;">Logout</button>
+        <div id="trackerStatusMessage" class="status-message-popup" style="display:none;"></div>
+
+        <button id="openOrgProfileButton" class="popup-action-button secondary-action-button">My Organization Profile</button>
+
+        <footer style="margin-top: auto; padding-top: 10px; border-top: 1px solid var(--divider-color); text-align: center;">
+            <a href="#" id="openOptionsPageLink" class="page-link" style="font-size: 0.9em;">Settings</a>
+            <span style="color: var(--text-muted); margin: 0 5px;">•</span>
+            <a href="https://fundingflock.ai/tos" target="_blank" rel="noopener noreferrer" class="page-link" style="font-size: 0.9em;">Terms</a>
+            <span style="color: var(--text-muted); margin: 0 5px;">•</span>
+            <a href="https://fundingflock.ai/privacy" target="_blank" rel="noopener noreferrer" class="page-link" style="font-size: 0.9em;">Privacy</a>
+        </footer>
+    </div>
+
+<!-- SCRIPT TAGS AT THE END OF BODY (CORRECTED) -->
+<script src="../libs/chart.umd.min.js" defer></script>
+<script src="../theme_handler.js" defer></script>
+<script src="popup.js" defer></script>
+<script src="../js/guidedTour.js" defer></script>
+</body>
+</html>

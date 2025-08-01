@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<!-- In organization_profile/organization_profile.html -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FundingFlock.AI - My Organization Profile</title>
+
+    <!-- CORRECTED PATHS (going up one level) -->
+    <link rel="stylesheet" href="../options/options.css">
+    <link rel="stylesheet" href="organization_profile.css">
+    <link rel="stylesheet" href="../css/guidedTour.css">
+</head>
+<body>
+    <div class="page-container profile-page">
+
+        <div class="page-title-header">
+            <div class="page-title-icon-themed"></div>
+            <h1>My Organization Profile</h1>
+        </div>
+
+        <div class="setting-container pdf-upload-section section-collapsible is-expanded">
+            <div class="section-header">
+                <h2>Upload & Process Document</h2>
+                <button type="button" class="section-toggle-button" aria-expanded="true">▼</button>
+            </div>
+            <div class="section-content">
+                <p class="instructions">
+                    Upload a document (PDF) like an Annual Report, a past proposal, or other organizational summary. Our AI will analyze it to help populate your profile below.
+                </p>
+                <div class="input-action-group">
+                    <label for="profileDocUploadInput" class="file-input-label">Select PDF:</label>
+                    <input type="file" id="profileDocUploadInput" accept=".pdf">
+                </div>
+                <button id="processDocButton" class="primary-action-button">Process Document with AI</button>
+                <div id="pdfProcessLoader" class="loader"></div>
+                <div id="pdfProcessStatus" class="status-message-global"></div>
+            </div>
+        </div>
+
+
+        <hr class="section-divider">
+
+        <h2>Organization Profile Sections</h2>
+        <p class="instructions">
+            Fill out your organization's core information below. This Master Profile will be the data source for tailoring grant proposals. Click "Save Full Organization Profile" at the bottom to store your changes.
+        </p>
+
+<form id="orgProfileForm">
+    <!-- Contact Information Section -->
+    <div class="profile-section setting-container section-collapsible is-expanded">
+        <div class="section-header">
+            <h3>Contact Information</h3>
+            <button type="button" class="section-toggle-button" aria-expanded="true">▼</button>
+        </div>
+        <div class="section-content">
+            <label for="orgName">Organization Name:</label>
+            <input type="text" id="orgName" name="orgName" placeholder="e.g., The Community Foundation">
+
+            <label for="orgTaxId">Tax ID / EIN:</label>
+            <input type="text" id="orgTaxId" name="orgTaxId" placeholder="e.g., 12-3456789">
+
+            <label for="orgWebsite">Website:</label>
+            <input type="url" id="orgWebsite" name="orgWebsite" placeholder="e.g., www.communityfoundation.org">
+
+            <label for="orgMissionStatement">Mission Statement:</label>
+            <textarea id="orgMissionStatement" name="orgMissionStatement" rows="4" placeholder="Our mission is to support and empower local artists..."></textarea>
+
+            <hr class="sub-divider">
+            <h4>Primary Contact Person</h4>
+            <div class="form-grid-2-col">
+                <div class="form-group">
+                    <label for="primaryContactName">Contact Name:</label>
+                    <input type="text" id="primaryContactName" name="primaryContactName" placeholder="e.g., Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="primaryContactTitle">Contact Title:</label>
+                    <input type="text" id="primaryContactTitle" name="primaryContactTitle" placeholder="e.g., Executive Director">
+                </div>
+            </div>
+            <div class="form-grid-2-col">
+                <div class="form-group">
+                    <label for="primaryContactEmail">Contact Email:</label>
+                    <input type="email" id="primaryContactEmail" name="primaryContactEmail" placeholder="e.g., jane.doe@communityfoundation.org">
+                </div>
+                <div class="form-group">
+                    <label for="primaryContactPhone">Contact Phone:</label>
+                    <input type="tel" id="primaryContactPhone" name="primaryContactPhone" placeholder="e.g., (555) 123-4567">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Organizational History & Capabilities Section -->
+    <div class="profile-section setting-container section-collapsible is-expanded">
+        <div class="section-header">
+           <h3>Organizational History & Capabilities</h3>
+           <button type="button" class="section-toggle-button" aria-expanded="true">▼</button>
+        </div>
+        <div class="section-content">
+            <label for="orgHistory">History & Background:</label>
+            <textarea id="orgHistory" name="orgHistory" rows="6" placeholder="Founded in 1995, our organization has been a cornerstone of the community..."></textarea>
+
+            <label for="orgCapabilities">Core Competencies (one per line):</label>
+            <textarea id="orgCapabilities" name="orgCapabilities" rows="4" placeholder="Community Outreach & Engagement
+Program Management for At-Risk Youth
+Fiscal Sponsorship & Grant Management..."></textarea>
+        </div>
+    </div>
+
+    <!-- Program/Project History Section -->
+    <div class="profile-section setting-container section-collapsible is-expanded">
+        <div class="section-header">
+            <h3>Program/Project History</h3>
+            <button type="button" class="section-toggle-button" aria-expanded="true">▼</button>
+        </div>
+        <div class="section-content">
+            <div id="newProjectEntryForm" class="dynamic-entry-form">
+                <h4>Add/Edit Program or Project</h4>
+                <input type="hidden" id="editingProjectIndex" value="-1">
+                <label for="newProjectTitle">Project/Program Title:</label>
+                <input type="text" id="newProjectTitle" placeholder="e.g., Youth Summer Arts Program">
+                <label for="newProjectFunder">Funding Source (Optional):</label>
+                <input type="text" id="newProjectFunder" placeholder="e.g., National Endowment for the Arts">
+                <label for="newProjectDates">Project Dates:</label>
+                <input type="text" id="newProjectDates" placeholder="e.g., June 2023 - August 2023">
+                <label for="newProjectOutcomes">Key Outcomes/Activities (one per line):</label>
+                <textarea id="newProjectOutcomes" rows="4" placeholder="Served 150 underserved youth in the community.
+Increased participants' self-reported confidence by 30%."></textarea>
+                <div class="form-actions">
+                    <button type="button" id="cancelEditProjectButton" class="secondary-action-button" style="display: none;">Cancel Edit</button>
+                    <button type="button" id="commitAddProjectButton" class="add-entry-button primary-action-button">+ Add Project</button>
+                </div>
+            </div>
+            <hr class="sub-divider">
+            <h4>Current Project Entries:</h4>
+            <div id="projectEntriesDisplayContainer">
+                <p class="no-entries-message">No project entries have been added.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+    <div class="save-profile-actions">
+        <button type="submit" id="saveProfileButton" class="primary-action-button">Save Full Organization Profile</button>
+    </div>
+    <div id="profileSaveStatus" class="status-message-global" style="margin-top:10px;"></div>
+</form>
+
+        <div id="extractedDataDisplay" class="setting-container section-collapsible is-expanded" style="display:none; margin-top:30px;">
+             <div class="section-header">
+                <h3>AI Extracted Data (Raw JSON Preview)</h3>
+                <button type="button" class="section-toggle-button" aria-expanded="true">▼</button>
+            </div>
+            <div class="section-content">
+                <pre id="parsedJsonPreview"></pre>
+            </div>
+        </div>
+
+    </div> <!-- End of .page-container -->
+
+<!-- SCRIPT TAGS AT THE END OF BODY (CORRECTED) -->
+    <script src="../theme_handler.js" defer></script>
+    <script src="../js/guidedTour.js" defer></script>
+    <script src="../js/orgProfileTour.js" defer></script>
+    <script src="organization_profile.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FundingFlock.AI - Settings</title>
+    <script src="../theme_handler.js" defer></script>
+    <!-- The ONLY stylesheet needed is the master one -->
+    <link rel="stylesheet" href="options.css">
+    <link rel="stylesheet" href="../css/guidedTour.css"> <!-- Guided Tour styles -->
+</head>
+<body>
+    <div class="page-container options-page-container">
+        
+        <!-- NEWLY ADDED BRANDING -->
+        <div class="page-banner"></div>
+        <div class="page-title-header">
+            <div class="page-title-icon-themed"></div>
+            <h1>FundingFlock.AI Settings</h1>
+        </div>
+        <!-- END OF NEWLY ADDED BRANDING -->
+
+        <!-- Your original content is preserved below, with button classes updated -->
+        <div class="setting-container api-key-section">
+            <label for="geminiApiKeyInput">Google Gemini API Key:</label>
+            <div style="display: flex; gap: 5px;"> 
+                <input type="password" id="geminiApiKeyInput" name="geminiApiKeyInput" size="60" placeholder="Enter your Gemini API Key" style="flex-grow: 1;">
+                <button type="button" id="toggleApiKeyVisibility" class="secondary-action-button">Show</button> 
+            </div>
+            <p style="font-size:0.8em; color:var(--text-muted); line-height: 1.4; margin-top: 10px;">
+                You can get your Gemini API Key from 
+                <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" style="color:var(--link-color);">Google AI Studio</a>.
+                <br>
+                Ensure the "Generative Language API" is enabled in your Google Cloud project.
+            </p>
+        </div>
+        <button id="saveApiKeyButton" class="primary-action-button" style="display:block; margin: -15px auto 10px auto;">Save API Key</button>
+        <div id="statusMessage" class="status-message-global" style="margin-top:5px; text-align: center;"></div> 
+
+        <hr class="section-divider">
+
+        <div class="setting-container tracker-sheet-config-section">
+            <h3>Grant / Funder Tracker Sheet</h3>
+            <label for="trackerSheetIdInput">Your Tracker Google Sheet ID:</label>
+            <input type="text" id="trackerSheetIdInput" size="50" placeholder="Enter your main FundingFlock.AI Sheet ID">
+            <p style="font-size:0.8em; color:var(--text-muted); line-height: 1.4; margin-top: 10px;">
+                This is the ID from the URL of your main FundingFlock.AI Google Sheet. This allows the extension to interact with your tracker.
+            </p>
+            <button id="saveTrackerSheetIdButton" class="secondary-action-button" style="margin-top:10px;">Save Sheet ID</button>
+            <div id="trackerSheetIdStatus" class="status-message-global" style="margin-top:10px; text-align: center;"></div>
+        </div>
+        
+        <hr class="section-divider">
+
+        <div class="setting-container about-section">
+            <h3>About & Profile</h3>
+            <p>FundingFlock.AI Version: <span id="extensionVersion">0.4.0</span></p>
+            <p>"Your AI Co-Pilot for Grant Applications"</p>
+            <p><a href="#" id="manageOrgProfileLink" style="color:var(--link-color);">Manage My Organization Profile</a></p>
+        </div>
+
+        <hr class="section-divider"> 
+
+        <div class="setting-container theme-selector-container">
+            <label for="themeSelector">Select Display Theme:</label>
+            <select id="themeSelector">
+                <option value="system">System Preference</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--divider-color); font-size: 0.9em;">
+             <a href="https://fundingflock.ai/tos" target="_blank" rel="noopener noreferrer" style="color:var(--link-color);">Terms of Service</a> |
+             <a href="https://fundingflock.ai/privacy" target="_blank" rel="noopener noreferrer" style="color:var(--link-color);">Privacy Policy</a>
+        </div>
+
+    </div> 
+
+    <script src="options.js"></script>
+    <script src="../js/guidedTour.js" defer></script>
+    <script src="optionsTour.js" defer></script>
+</body>
+</html>

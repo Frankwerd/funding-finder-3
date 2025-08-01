@@ -1,0 +1,72 @@
+<!-- START SNIPPET: Replace entire content of autofill_tutorial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FundingFlock.AI Autofill Tutorial</title>
+    <script src="./theme_handler.js" defer></script>
+    <link rel="stylesheet" href="./options/options.css">
+    <link rel="stylesheet" href="./css/guidedTour.css">
+<style>
+    .page-container.tutorial-container { max-width: 1400px; padding-right: 440px; box-sizing: border-box; transition: padding-right 0.4s ease-in-out; }
+    #setup-iframe-container { position: fixed; top: 0; right: 0; width: 420px; height: 100vh; background-color: var(--primary-bg-alt); border-left: 1px solid var(--divider-color); box-shadow: -3px 0 15px rgba(0,0,0,0.12); z-index: 2000; display: flex; transition: width 0.4s ease-in-out; }
+    #setupIframe { width: 100%; height: 100%; border: none; }
+    .tutorial-columns { display: grid; grid-template-columns: 2fr 3fr; gap: 40px; }
+    .rfp-col, .application-form-col { padding: 20px; border: 1px solid var(--divider-color); border-radius: 6px; }
+    h2 { color: var(--header-color); border-bottom: 2px solid var(--divider-color); padding-bottom: 10px; margin-top: 0; }
+    .tutorial-intro { background-color: var(--primary-bg-alt); border-left: 4px solid var(--lapis-lazuli); padding: 15px; margin-bottom: 30px; border-radius: 4px; font-size: 0.95em;}
+    .form-group { margin-bottom: 20px; }
+    .form-actions { text-align: right; margin-top: 30px; }
+    fieldset { border: 1px solid var(--divider-color); border-radius: 6px; padding: 15px; margin-bottom: 20px; }
+    legend { font-weight: 600; padding: 0 10px; color: var(--header-color); }
+    .radio-group { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 5px; }
+    .radio-group label { display: inline-flex; align-items: center; font-weight: normal; cursor: pointer; }
+    .radio-group input[type="radio"] { width: auto; margin-right: 8px; }
+</style>
+</head>
+<body>
+    <div id="skipTutorialControls" style="position: fixed; top: 15px; left: 15px; z-index: 10001;"><button id="skipTutorialButton" class="secondary-action-button">Skip Setup Tutorial</button></div>
+    <div id="setup-iframe-container"><iframe id="setupIframe" src="./popup/popup.html?context=tutorial"></iframe></div>
+    <div class="page-container tutorial-container">
+        <div class="page-banner"></div>
+        <header class="page-header"><h1>FundingFlock.AI Autofill Tutorial</h1></header>
+        <div class="tutorial-columns">
+            <div class="rfp-col">
+                <h2>Request for Proposal (RFP)</h2>
+                <h3>Youth Arts & STEM Initiative</h3>
+                <p><strong>Funder:</strong> The Civic Progress Foundation<br><strong>Location:</strong> National (USA)</p>
+                <h4>Funding Goals</h4>
+                <p>The Civic Progress Foundation seeks to fund innovative after-school programs that bridge the gap between arts and STEM education for underserved youth (ages 12-18).</p>
+                <h4>Key Priorities</h4>
+                <ul><li>Programs that demonstrate a clear link between creative expression and technical skill development.</li><li>Initiatives that serve communities with limited access to enrichment activities.</li><li>Projects with measurable outcomes related to student engagement and skill acquisition.</li></ul>
+                <h4>Eligibility Requirements</h4>
+                <ul><li>Applicant must be a registered 501(c)(3) non-profit organization.</li><li>Proven track record of at least 2 years in youth program management.</li><li>Proposed project must serve at least 50 students.</li></ul>
+            </div>
+            <div class="application-form-col">
+                <h2>Application Form</h2>
+                <div class="tutorial-intro"><strong>Instructions:</strong><ol><li>Ensure you have saved your Master Profile data.</li><li>Follow the steps in the Guided Tour prompts.</li><li>Click "Autofill from Master Profile" when instructed.</li><li>Observe how your data populates this form.</li></ol></div>
+                <form id="tutorial-grant-app-form">
+                    <h3>Organization Information</h3>
+                    <div class="form-group"><label for="orgName">Organization Name</label><input type="text" id="orgName" name="organization_name" required></div>
+                    <div class="form-group"><label for="orgEin">Tax ID (EIN)</label><input type="text" id="orgEin" name="ein" required></div>
+                    <div class="form-group"><label for="orgWebsite">Website</label><input type="url" id="orgWebsite" name="website_url"></div>
+                    <h3>Primary Contact</h3>
+                    <div class="form-group"><label for="contactName">Full Name</label><input type="text" id="contactName" name="contact_name"></div>
+                    <div class="form-group"><label for="contactEmail">Email Address</label><input type="email" id="contactEmail" name="contact_email"></div>
+                    <h3>Project Details</h3>
+                    <div class="form-group"><label for="projectAbstract">Project Abstract</label><textarea id="projectAbstract" name="project_abstract" rows="6" placeholder="A brief, tailored summary of your proposed project will appear here."></textarea></div>
+                    <div class="form-group"><label for="requestedAmount">Requested Funding Amount</label><input type="text" id="requestedAmount" name="funding_amount" placeholder="e.g., 25000"></div>
+                    <h3>Agreements</h3>
+                    <fieldset><legend>Eligibility Confirmation</legend><div class="radio-group"><label><input type="radio" name="eligibility" value="yes"> We confirm our organization meets all eligibility requirements.</label><label><input type="radio" name="eligibility" value="no"> We do not meet all requirements.</label></div></fieldset>
+                    <div class="form-actions"><button type="submit" class="primary-action-button" onclick="alert('Submission successful! (This is a demo)'); return false;">Submit Grant Application</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="./js/internal_page_autofill_handler.js" defer></script>
+    <script src="./js/guidedTour.js" defer></script>
+    <script src="./js/tutorialHostTour.js" defer></script>
+</body>
+</html>
+<!-- END SNIPPET -->
