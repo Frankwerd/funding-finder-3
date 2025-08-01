@@ -52,8 +52,8 @@
         try {
             CACHED_RSRC_URLS.fab_icon_neutral = chrome.runtime.getURL('icons/fab_logo_neutral.png');
             CACHED_RSRC_URLS.panel_css = chrome.runtime.getURL('content_scripts/panel_styles.css');
-            CACHED_RSRC_URLS.panel_header_icon_light = chrome.runtime.getURL('icons/icon48_light.png');
-            CACHED_RSRC_URLS.panel_header_icon_dark = chrome.runtime.getURL('icons/icon48_dark.png');
+            CACHED_RSRC_URLS.panel_header_icon_light = chrome.runtime.getURL('icons/icon48.png');
+            CACHED_RSRC_URLS.panel_header_icon_dark = chrome.runtime.getURL('icons/icon48.png');
             resourceUrlsInitialized = true;
         } catch (e) { resourceUrlsInitialized = false; }
         return resourceUrlsInitialized;

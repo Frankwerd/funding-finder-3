@@ -106,8 +106,15 @@ function smartPrefixUrl(url) {
     }
 
     function escapeHtml(unsafe) {
-        if (typeof unsafe !== 'string') return (unsafe === null || unsafe === undefined) ? '' : String(unsafe);
-        return unsafe.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">").replace(/"/g, """).replace(/'/g, "'");
+        if (typeof unsafe !== 'string') {
+            return (unsafe === null || unsafe === undefined) ? '' : String(unsafe);
+        }
+        return unsafe
+            .replace(/&/g, "&")
+            .replace(/</g, "<")
+            .replace(/>/g, ">")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "'");
     }
 
     function callBackgroundForPdfAnalysis(apiKey, prompt, pdfBase64Data) {

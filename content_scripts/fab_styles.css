@@ -35,7 +35,7 @@
     background-image: var(--fab-icon-url); /* Set by JS */
     border: 1.5px solid var(--fab-outline-color, #2F4858);
 
-    background-size: 65%;
+    background-size: 95%;
     background-repeat: no-repeat;
     background-position: center;
 
