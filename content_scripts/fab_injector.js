@@ -454,6 +454,25 @@
                 if (iframeSrc && panelIframeElement.src !== iframeSrc) {
                     try {
                         panelIframeElement.src = iframeSrc;
+// START SNIPPET: Add this block in fab_injector.js after panelIframeElement.src is set
+// --- THE FIX: Proactively request height after the iframe finishes loading ---
+panelIframeElement.onload = () => {
+    // This event fires when the new page (like organization_profile.html)
+    // has fully loaded in the iframe.
+    setTimeout(() => {
+        if (panelIframeElement && panelIframeElement.contentWindow) {
+            try {
+                // We proactively ask the newly loaded page for its height.
+                panelIframeElement.contentWindow.postMessage({
+                    type: 'REQUEST_HEIGHT_UPDATE'
+                }, '*');
+            } catch (e) {
+                // This might fail due to cross-origin policies on some sites, but is safe to ignore.
+            }
+        }
+    }, 200); // A small delay to ensure scripts inside the iframe have run.
+};
+// END SNIPPET
                     }
                     catch(e) {
                         console.error("[fab_injector.js setPanelVisibility] CS Panel: Error setting iframe src.", e);

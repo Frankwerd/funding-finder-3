@@ -332,30 +332,46 @@ if (orgWebsiteInput) {
     }
 
     initializePage();
-// START SNIPPET: Add to organization_profile.js
-// --- DYNAMIC HEIGHT MESSAGING TO PARENT PANEL ---
+// START SNIPPET: Replace the height logic block in organization_profile.js with this
+// --- DYNAMIC HEIGHT MESSAGING TO PARENT PANEL (ROBUST VERSION) ---
 let heightSendTimeout = null;
 function sendHeightToParentDebounced() {
     clearTimeout(heightSendTimeout);
     heightSendTimeout = setTimeout(() => {
         if (window.parent !== window) {
-            const pageContainer = document.querySelector('.page-container.profile-page');
-            const calculatedContentHeight = pageContainer ? pageContainer.scrollHeight : document.body.scrollHeight;
+            // THE FIX: Use documentElement.scrollHeight. This is the most reliable
+            // measure of the total height of all rendered content in the iframe.
+            const calculatedContentHeight = document.documentElement.scrollHeight;
+
             window.parent.postMessage({
                 type: 'FUNDINGFLOCK_IFRAME_CONTENT_HEIGHT',
-                height: calculatedContentHeight + 20 // Add buffer
+                height: calculatedContentHeight + 20 // Add a 20px buffer
             }, '*');
         }
-    }, 150);
+    }, 150); // Debounce to avoid excessive messages during rapid changes
 }
+
+// THE FIX: Use a ResizeObserver on the root element of the document.
+// This will reliably fire whenever *any* content change causes the total
+// document height to change (e.g., collapsing a section, adding a project).
 if (typeof ResizeObserver !== "undefined") {
-    const pageContainerForObserver = document.querySelector('.page-container.profile-page');
-    if (pageContainerForObserver) {
-        const resizeObserver = new ResizeObserver(sendHeightToParentDebounced);
-        resizeObserver.observe(pageContainerForObserver);
-    }
+    const resizeObserver = new ResizeObserver(sendHeightToParentDebounced);
+    // Observe the <html> element itself for any size changes.
+    resizeObserver.observe(document.documentElement);
 }
+
+// THE FIX: Send multiple height updates after initial load. This helps
+// overcome the initial race condition by sending updates as the page layout settles.
 setTimeout(sendHeightToParentDebounced, 300);
+setTimeout(sendHeightToParentDebounced, 600);
+setTimeout(sendHeightToParentDebounced, 1200); // A final check after 1.2 seconds
+
+// THE FIX: Add a listener so the parent can proactively ask for the height.
+window.addEventListener('message', (event) => {
+    if (event.source === window.parent && event.data.type === 'REQUEST_HEIGHT_UPDATE') {
+        sendHeightToParentDebounced();
+    }
+});
 // END SNIPPET
 });
 // END SNIPPET
