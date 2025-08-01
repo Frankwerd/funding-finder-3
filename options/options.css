@@ -161,11 +161,7 @@ body.theme-system-actual-dark .page-banner {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('../icons/icon48_light.png');
-}
-body.theme-dark .page-title-icon-themed,
-body.theme-system-actual-dark .page-title-icon-themed {
-    background-image: url('../icons/icon48_dark.png');
+    background-image: url('../icons/icon48.png');
 }
 .page-title-header h1 {
     margin: 0;

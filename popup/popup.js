@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (typeof unsafe !== 'string') {
             return (unsafe === null || unsafe === undefined) ? '' : String(unsafe);
         }
-
         return unsafe
             .replace(/&/g, "&")
             .replace(/</g, "<")

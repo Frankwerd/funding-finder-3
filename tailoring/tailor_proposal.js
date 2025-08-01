@@ -60,8 +60,15 @@ if (window.parent !== window) {
 
     // --- Helper Functions ---
     function escapeHtml(unsafe) {
-        if (typeof unsafe !== 'string') return (unsafe === null || unsafe === undefined) ? '' : String(unsafe);
-        return unsafe.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">").replace(/"/g, """).replace(/'/g, "'");
+        if (typeof unsafe !== 'string') {
+            return (unsafe === null || unsafe === undefined) ? '' : String(unsafe);
+        }
+        return unsafe
+            .replace(/&/g, "&")
+            .replace(/</g, "<")
+            .replace(/>/g, ">")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "'");
     }
 
     function showStatus(element, message, type = "success", duration = 3000) {
